@@ -2,24 +2,58 @@
 layout: post
 title:  "Welcome to Jekyll!"
 date:   2019-01-05 20:22:45 +0800
-categories: jekyll update
+categories: jekyll
 ---
-You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 
-To add new posts, simply add a file in the `_posts` directory that follows the convention `YYYY-MM-DD-name-of-post.ext` and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.
+References:
+* [How to Start a Jekyll Blog on GitHub Pages for Free](https://onextrapixel.com/start-jekyll-blog-github-pages-free/)
+* [kramdown Syntax](https://kramdown.gettalong.org/syntax.html)
 
-Jekyll also offers powerful support for code snippets:
+\>jekyll serve --watch
 
-{% highlight ruby %}
-def print_hi(name)
-  puts "Hi, #{name}"
-end
-print_hi('Tom')
-#=> prints 'Hi, Tom' to STDOUT.
-{% endhighlight %}
+    Traceback (most recent call last):
+        5: from C:/Ruby25-x64/bin/jekyll:23:in `<main>'
+        4: from C:/Ruby25-x64/bin/jekyll:23:in `load'
+        3: from C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/jekyll-3.8.5/exe/jekyll:11:in `<top (required)>'
+        2: from C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/jekyll-3.8.5/lib/jekyll/plugin_manager.rb:48:in `require_from_bundler'
+        1: from C:/Ruby25-x64/lib/ruby/2.5.0/rubygems/core_ext/kernel_require.rb:59:in `require'
+C:/Ruby25-x64/lib/ruby/2.5.0/rubygems/core_ext/kernel_require.rb:59:in `require': cannot load such file -- bundler (LoadError)
 
-Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
+\>gem install jekyll bundler
 
-[jekyll-docs]: https://jekyllrb.com/docs/home
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/
+\>bundle install
+
+\>jekyll serve --watch
+
+    Configuration file: D:/Code/yingang.github.io/_config.yml
+            Source: D:/Code/yingang.github.io
+       Destination: D:/Code/yingang.github.io/_site
+ Incremental build: disabled. Enable with --incremental
+      Generating...
+       Jekyll Feed: Generating feed for posts
+jekyll 3.8.5 | Error:  File exists @ dir_s_mkdir - D:/Code/yingang.github.io/_site/jekyll
+
+\>bundle exec jekyll serve
+
+    Configuration file: D:/Code/yingang.github.io/_config.yml
+            Source: D:/Code/yingang.github.io
+       Destination: D:/Code/yingang.github.io/_site
+ Incremental build: disabled. Enable with --incremental
+      Generating...
+       Jekyll Feed: Generating feed for posts
+jekyll 3.8.5 | Error:  File exists @ dir_s_mkdir - D:/Code/yingang.github.io/_site/jekyll
+
+remove a file named with 'jekyll' under the root folder.
+
+\>bundle exec jekyll serve
+
+    Configuration file: D:/Code/yingang.github.io/_config.yml
+            Source: D:/Code/yingang.github.io
+       Destination: D:/Code/yingang.github.io/_site
+ Incremental build: disabled. Enable with --incremental
+      Generating...
+       Jekyll Feed: Generating feed for posts
+                    done in 1.274 seconds.
+ Auto-regeneration: enabled for 'D:/Code/yingang.github.io'
+    Server address: http://127.0.0.1:4000/
+  Server running... press ctrl-c to stop.
