@@ -2,14 +2,14 @@
 layout: post
 title:  "Welcome to Jekyll!"
 date:   2019-01-05 20:22:45 +0800
-categories: jekyll
+categories: jekyll 
 ---
 
 References:
 * [How to Start a Jekyll Blog on GitHub Pages for Free](https://onextrapixel.com/start-jekyll-blog-github-pages-free/)
 * [kramdown Syntax](https://kramdown.gettalong.org/syntax.html)
 
-\>jekyll serve --watch
+\>jekyll serve \--watch
 
     Traceback (most recent call last):
         5: from C:/Ruby25-x64/bin/jekyll:23:in `<main>'
@@ -23,7 +23,7 @@ C:/Ruby25-x64/lib/ruby/2.5.0/rubygems/core_ext/kernel_require.rb:59:in `require'
 
 \>bundle install
 
-\>jekyll serve --watch
+\>jekyll serve \--watch
 
     Configuration file: D:/Code/yingang.github.io/_config.yml
             Source: D:/Code/yingang.github.io
