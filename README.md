@@ -1,1 +1,1 @@
-# [https://yingang.github.io](yingang.github.io)
+# [yingang.github.io](https://yingang.github.io)
