@@ -11,7 +11,7 @@ VSCode 插件似乎这两个就足够了：
 
 创建测试项目：
 
-    cargo new hello-rust \--bin
+    cargo new hello-rust --bin
 
 创建并修改 launch.json 的 program，并添加 preLaunchTask，同时将 externalConsole 改为 false：
 
@@ -57,9 +57,9 @@ VSCode 插件似乎这两个就足够了：
 
     c:/rustc/9fda7c2237db910e41d6a712e9a2139b352e558b/
 
-并创建软链接指向实际的 Rust 源代码位置：
+并在该文件夹下，创建软链接指向实际的 Rust 源代码位置：
 
     mklink /J src C:\Users\gang.yin\.rustup\toolchains\stable-x86_64-pc-windows-msvc\lib\rustlib\src\rust\src
 
 遗留问题：
-* 在 .rs 中对方法 F12，提示 No Definition found for ...
+* ~~在 .rs 中对方法 F12，提示 No Definition found for ...~~ 好像只是类似于 println! 这样的宏无法 F12，为啥？
