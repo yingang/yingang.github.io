@@ -2,7 +2,7 @@
 layout: post
 title:  "Hello Rust!"
 date:   2019-05-02 20:02:45 +0800
-categories: rust
+categories: rust vscode
 ---
 
 VSCode 插件似乎这两个就足够了：
