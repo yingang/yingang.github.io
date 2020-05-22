@@ -14,25 +14,25 @@ categories: strftime tellg
 * strftime
 
 ~~~cpp
-	auto nsec = boost::lexical_cast<int>(sec);
-	tm t = *localtime((time_t *)&nsec);
-	const int BUF_LEN = 80;
-	char buf[BUF_LEN] = {0};
-	auto size = strftime(buf, BUF_LEN - 1, "%y%m%d %H:%M:%S", &t);
+auto nsec = boost::lexical_cast<int>(sec);
+tm t = *localtime((time_t *)&nsec);
+const int BUF_LEN = 80;
+char buf[BUF_LEN] = {0};
+auto size = strftime(buf, BUF_LEN - 1, "%y%m%d %H:%M:%S", &t);
 ~~~
 
-    用这个方法来将 unix 的时间戳（从 1970 年开始的秒数）转换成人类可读的表示形式，其中提供给 strftime 的缓存大小，从格式字符串来看，最多十几个字节应该就够了，但日志解析时偶发会 crash 在这里，后来改成 80 后暂时没有碰到问题。而且偶发的 crash 仅发生在 release build（开启了优化）之后，debug build 无法复现，脑壳疼。
+用这个方法来将 unix 的时间戳（从 1970 年开始的秒数）转换成人类可读的表示形式，其中提供给 strftime 的缓存大小，从格式字符串来看，最多十几个字节应该就够了，但日志解析时偶发会 crash 在这里，后来改成 80 后暂时没有碰到问题。而且偶发的 crash 仅发生在 release build（开启了优化）之后，debug build 无法复现，脑壳疼。
 
 * tellg
 
 ~~~cpp
-	std::ifstream fin(filepath, std::ios::binary);
-    fin.seekg(0, std::ios::end);
-    auto length = fin.tellg();  // BANG!
-	boost::shared_array<char> buf(new char[length]);
- 	fin.seekg(0, std::ios::beg);
+std::ifstream fin(filepath, std::ios::binary);
+fin.seekg(0, std::ios::end);
+auto length = fin.tellg();  // BANG!
+boost::shared_array<char> buf(new char[length]);
+fin.seekg(0, std::ios::beg);
 ~~~
 
-    用这个方法来获取文件大小，在特定情形下（可重复）对于个别文件永远返回的是 -1（还好这个问题可以在 debug build 复现），后来换成 boost::filesystem::file_size 规避掉了。确实[网上也有人说 tellg 不保证能得到正确的文件大小](https://stackoverflow.com/questions/22984956/tellg-function-give-wrong-size-of-file/22986486#22986486)，本质的原因没太搞懂。
+用这个方法来获取文件大小，在特定情形下（可重复）对于个别文件永远返回的是 -1（还好这个问题可以在 debug build 复现），后来换成 boost::filesystem::file_size 规避掉了。确实[网上也有人说 tellg 不保证能得到正确的文件大小](https://stackoverflow.com/questions/22984956/tellg-function-give-wrong-size-of-file/22986486#22986486)，本质的原因没太搞懂。
 
 最后，在基本功能稳定之后，稍微优化了下（比如用基于 C++ 标准库的代码来替换 boost::format 和 boost::split 等，以及对最近解析过的时间戳做一些缓存），解析性能达到了 Python 版本的 5 倍，还不错。
