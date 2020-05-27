@@ -15,13 +15,24 @@ categories: strftime tellg
 
 ~~~cpp
 auto nsec = boost::lexical_cast<int>(sec);
-tm t = *localtime((time_t *)&nsec);
+tm t = *localtime((time_t *)&nsec); // WRONG!!!
 const int BUF_LEN = 80;
 char buf[BUF_LEN] = {0};
 auto size = strftime(buf, BUF_LEN - 1, "%y%m%d %H:%M:%S", &t);
 ~~~
 
-用这个方法来将 unix 的时间戳（从 1970 年开始的秒数）转换成人类可读的表示形式，其中提供给 strftime 的缓存大小，从格式字符串来看，最多十几个字节应该就够了，但日志解析时偶发会 crash 在这里，后来改成 80 后暂时没有碰到问题。而且偶发的 crash 仅发生在 release build（开启了优化）之后，debug build 无法复现，脑壳疼。
+~~用这个方法来将 unix 的时间戳（从 1970 年开始的秒数）转换成人类可读的表示形式，其中提供给 strftime 的缓存大小，从格式字符串来看，最多十几个字节应该就够了，但日志解析时偶发会 crash 在这里，后来改成 80 后暂时没有碰到问题。而且偶发的 crash 仅发生在 release build（开启了优化）之后，debug build 无法复现，脑壳疼。~~
+
+找到问题了（2020/05/27），学艺不精真是丢人。。。有问题的是前面调用 localtime 时的参数处理，int 指针强转 time_t 指针是有问题的，因为类型的位宽不同导致了未定义行为，并影响了后面的 strftime。正确的写法应该是类似于：
+
+~~~cpp
+time_t nsec = boost::lexical_cast<int>(sec);
+tm t = *localtime(&nsec);
+const int BUF_LEN = 32;
+char buf[BUF_LEN] = {0};
+auto size = strftime(buf, BUF_LEN - 1, "%y%m%d %H:%M:%S", &t);
+~~~
+
 
 * tellg
 
