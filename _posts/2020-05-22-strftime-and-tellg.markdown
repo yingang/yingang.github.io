@@ -33,7 +33,6 @@ char buf[BUF_LEN] = {0};
 auto size = strftime(buf, BUF_LEN - 1, "%y%m%d %H:%M:%S", &t);
 ~~~
 
-
 * tellg
 
 ~~~cpp
@@ -44,6 +43,16 @@ boost::shared_array<char> buf(new char[length]);
 fin.seekg(0, std::ios::beg);
 ~~~
 
-用这个方法来获取文件大小，在特定情形下（可重复）对于个别文件永远返回的是 -1（还好这个问题可以在 debug build 复现），后来换成 boost::filesystem::file_size 规避掉了。确实[网上也有人说 tellg 不保证能得到正确的文件大小](https://stackoverflow.com/questions/22984956/tellg-function-give-wrong-size-of-file/22986486#22986486)，本质的原因没太搞懂。
+~~用这个方法来获取文件大小，在特定情形下（可重复）对于个别文件永远返回的是 -1（还好这个问题可以在 debug build 复现），后来换成 boost::filesystem::file_size 规避掉了。确实[网上也有人说 tellg 不保证能得到正确的文件大小](https://stackoverflow.com/questions/22984956/tellg-function-give-wrong-size-of-file/22986486#22986486)，本质的原因没太搞懂。~~
+
+应该也找到问题了（2020/06/10），丢人again。。。似乎 Windows 上单个进程能同时打开的文件数量是有限制的（比如按[这里](https://stackoverflow.com/questions/870173/is-there-a-limit-on-number-of-open-files-in-windows)说的，基于 C 运行库的进程最多能打开 512 个文件）。代码层面的根本问题是没有对文件打开的结果做检查，正确的姿势应该是这样的：
+
+~~~cpp
+std::ifstream fin(filepath, std::ios::binary);
+if (fin.is_open())
+{
+    ...
+}
+~~~
 
 最后，在基本功能稳定之后，稍微优化了下（比如用基于 C++ 标准库的代码来替换 boost::format 和 boost::split 等，以及对最近解析过的时间戳做一些缓存），解析性能达到了 Python 版本的 5 倍，还不错。
