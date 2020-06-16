@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "用 strftime 和 tellg 用到怀疑人生"
+title:  "大型翻车丢人现场实录"
 date:   2020-05-22 10:42:45 +0800
 categories: strftime tellg
 ---
@@ -45,7 +45,7 @@ fin.seekg(0, std::ios::beg);
 
 ~~用这个方法来获取文件大小，在特定情形下（可重复）对于个别文件永远返回的是 -1（还好这个问题可以在 debug build 复现），后来换成 boost::filesystem::file_size 规避掉了。确实[网上也有人说 tellg 不保证能得到正确的文件大小](https://stackoverflow.com/questions/22984956/tellg-function-give-wrong-size-of-file/22986486#22986486)，本质的原因没太搞懂。~~
 
-应该也找到问题了（2020/06/10），丢人again。。。似乎 Windows 上单个进程能同时打开的文件数量是有限制的（比如按[这里](https://stackoverflow.com/questions/870173/is-there-a-limit-on-number-of-open-files-in-windows)说的，基于 C 运行库的进程最多能打开 512 个文件）。代码层面的根本问题是没有对文件打开的结果做检查，正确的姿势应该是这样的：
+也找到问题了（2020/06/10），丢人again。。。似乎 Windows 上单个进程能同时打开的文件数量是有限制的（比如按[这里](https://stackoverflow.com/questions/870173/is-there-a-limit-on-number-of-open-files-in-windows)说的，基于 C 运行库的进程最多能打开 512 个文件）。代码层面的根本问题是没有对文件打开的结果做检查（因为要打开的文件都是本地刚遍历出来的，完全没想到还会有打不开的可能性。。。），正确的姿势应该是这样的：
 
 ~~~cpp
 std::ifstream fin(filepath, std::ios::binary);
