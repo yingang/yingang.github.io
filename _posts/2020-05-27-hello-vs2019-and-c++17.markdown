@@ -1,0 +1,76 @@
+---
+layout: post
+title:  "Hello, Visual Studio 2019 and C++ 17!"
+date:   2020-05-27 16:21:00 +0800
+categories: c++ vs2019
+---
+
+继续[前一个帖子](https://yingang.github.io/strftime/tellg/2020/05/22/strftime-and-tellg.html)中提到的日志解析小工具，最近正好装了 VS2019，想看看是不是 C++ 1x 基本可以代替掉对 boost 库的那些使用场景，毕竟只是个小工具，不希望有太多的外部依赖。
+
+* boost::filesystem
+
+  可以用 [std::filesystem](https://en.cppreference.com/w/cpp/header/filesystem) 代替，仅限 C++17 之后，接口基本类似，碰到一个 is_regular 改成 is_regular_file 的情况。
+
+* boost::replace
+
+  可以用 [std::replace](https://en.cppreference.com/w/cpp/algorithm/replace) 代替，示例：
+
+  ~~~cpp
+  std::replace(src.begin(), src.end(), '/', '_');
+  ~~~
+
+* boost::timer
+
+  我只用来计时，可以用 [std::chrono](https://en.cppreference.com/w/cpp/chrono) 代替，示例：
+
+  ~~~cpp
+  using namespace std::chrono;
+  auto start = system_clock::now();
+  ...
+  auto elapsed = duration_cast<duration<double>>(system_clock::now() - start).count();   // in seconds
+  ~~~
+
+* boost::shared_array
+
+  可以用类似于 std::shared_ptr<int[]> 的方式来代替，仅限 C++17 之后，示例：
+
+  ~~~cpp
+  std::shared_ptr<char[]> buf(new char[length]);
+  ~~~
+
+* boost::split
+
+  没有现成的，手撸一个也不算麻烦，示例：
+
+  ~~~cpp
+  void split(const std::string& input, char delim, std::vector<std::string>& tokens)
+  {
+      std::string::size_type start = 0;
+      for (;;)
+      {
+          auto to = input.find(delim, start);
+          tokens.push_back(input.substr(start, to - start));
+          if (to == std::string::npos)
+              break;
+
+          start = to + 1;
+      }
+  }
+  ~~~
+
+* boost::join
+
+  没有现成的，反正就是用分隔符间隔输出一个列表的内容，用 std::stringstream 手工撸，起到了类似的效果。
+
+题外：
+1. 上述那些做完之后，输出文件小了一半（从 150+ KB 减小到了 80+ KB），运行效率也高了一些。 // 没有细扣具体来源，理论上除了基本的磁盘 IO 无法避免，处理分析上的优化潜力还不少。
+1. 相比较 VS2010，在 VS2019 的开发调试上还是有不少改进的，但尚未来得及一一体会。
+
+<script src="https://utteranc.es/client.js"
+        repo="yingang/yingang.github.io"
+        issue-term="pathname"
+        label="Comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
