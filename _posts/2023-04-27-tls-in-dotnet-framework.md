@@ -115,7 +115,7 @@ System.Net.Mail.SmtpException: 发送邮件失败。 ---> System.IO.IOException:
 
   编注：如果是 64 位平台跑 32 位应用，还需要改 `Wow6432Node` 下的。
 	  
-看着都挺有道理的，但试下来，还是没用。。。谨遵医嘱，重启也没有效果。甚至还试了下面这个 WinHttp 相关的，重启后还给我自动改回去了。
+看着都挺有道理的，但试下来，还是没用。。。包括谨遵医嘱在修改之后重启也没有效果。甚至还试了下面这个 WinHttp 相关的，重启后还给我自动改回去了。
 
   ```plaintext
   HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings\WinHttp\
@@ -166,9 +166,9 @@ client.ServerCertificateValidationCallback = (s, c, h, e) => true;
 
 ## 尾声
 
-我是该应该继续使用 MailKit，还是该直接给测试机升级个 Win10？
+我是应该继续使用 MailKit，还是该直接给测试机升级个 Win10？
 
-可能两个都得做吧。
+可能两个都得做吧，既然微软官方也不建议继续使用 [System.Net.Mail.SmtpClient](https://learn.microsoft.com/en-us/dotnet/api/system.net.mail.smtpclient?view=net-7.0#remarks)。
 
 <script src="https://utteranc.es/client.js"
         repo="yingang/yingang.github.io"
