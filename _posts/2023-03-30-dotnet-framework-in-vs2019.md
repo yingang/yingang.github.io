@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "在 VS2019 中创建针对 .NET Framework 4.8 的应用"
+title:  "在 VS2019 中创建针对 .NET Framework 4.x 的应用"
 date:   2023-03-30 17:45:00 +0800
 categories: c# tfs
 ---
@@ -60,7 +60,7 @@ Press any key to close this window . . .
 
 ## 冲刺
 
-然后死活在我的 DEMO 项目设置里找不到 .NET 4.8，尝试过单独下载 4.8 的开发包，尝试过在 Visual Studio Installer 中选上 4.8，到最后才发现是我选择的项目类型就不对，要选 Console App (.NET Framework) 而不是排在最前面的 Console Application，后者是基于 .NET 5+ 的！
+然后死活在我的 DEMO 项目设置里找不到 .NET 4.x，尝试过单独下载 4.x 的开发包，尝试过在 Visual Studio Installer 中选上 4.x，到最后才发现是我选择的项目类型就不对，要选 Console App (.NET Framework) 而不是排在最前面的 Console Application，后者是基于 .NET 5+ 的！
 
 终于可以用不那么陈旧的宇宙第一 IDE 来干活了，最近有空再继续学习下 C#。
 
