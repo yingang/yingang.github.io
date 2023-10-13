@@ -2,7 +2,7 @@
 layout: post
 title:  "升级下家里的无线路由器"
 date:   2023-10-13 20:00:00 +0800
-categories: digital
+categories: life digital
 ---
 
 家里的路由器还是不知道哪年入手的极路由 4 增强版，听说最近都出 WiFi7 了，想着要不咱先升级个 WiFi6？正好看看家里偶尔出现的 B 站视频播放卡顿问题和这个有没有关系。

@@ -2,7 +2,7 @@
 layout: post
 title:  "在 Win10 上通过批处理运行特权应用"
 date:   2019-05-24 20:02:45 +0800
-categories: win10 cmd
+categories: software windows cmd
 ---
 
 ### 问题

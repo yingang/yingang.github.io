@@ -2,7 +2,7 @@
 layout: post
 title:  "Windows 上的环境变量设置"
 date:   2021-09-04 11:18:00 +0800
-categories: windows powershell
+categories: software windows powershell
 ---
 
 继续[在 B 站上 Rust 课](https://www.bilibili.com/video/BV1h64y197G3)，进行到使用 tracing 组件输出 log 的时候，需要在 VSCode 里设置环境变量，默认的 powershell 我也不太会用，稍加学习后总结如下，估计以后还用得着。

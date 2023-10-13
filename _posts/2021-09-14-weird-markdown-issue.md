@@ -2,7 +2,7 @@
 layout: post
 title:  "奇怪的 Markdown 问题"
 date:   2021-09-14 13:18:00 +0800
-categories: markdown
+categories: software markdown
 ---
 
 ### 问题

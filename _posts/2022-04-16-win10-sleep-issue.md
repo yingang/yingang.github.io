@@ -2,7 +2,7 @@
 layout: post
 title:  "[未解决] WIN10 的睡眠问题"
 date:   2022-04-16 22:36:00 +0800
-categories: windows
+categories: software windows
 ---
 
 感觉上 Win7 之后的新 Windows 版本，搞不明白的地方越来越多了，也不太方便查到相关的一些资料。
