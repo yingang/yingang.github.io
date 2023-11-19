@@ -13,6 +13,9 @@ categories: game switch
 
   安装空间不足，在使用 `xcz` 和 `nsz` 等压缩格式的安装文件时更容易碰到，需要先清理出足够的空间。
 
+- `ZSTD DECOMPRESSION ERROR: 64`
+
+  applet 模式下（从相册启动，最新版 dbi 会是蓝色背景）运行 dbi 内存不足，改为 title 模式下（按住 R 键启动游戏，最新版 dbi 会是黑色背景）运行即可。
 
 ## 参考
 
