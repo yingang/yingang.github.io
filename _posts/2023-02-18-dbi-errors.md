@@ -15,7 +15,7 @@ categories: game switch
 
 - `ZSTD DECOMPRESSION ERROR: 64`
 
-  原因是在 Applet 模式下（从相册启动，最新版 dbi 会显示蓝色背景）运行 dbi 内存不足导致解压缩失败，改为在 Title 或 Application 模式下（按住 R 键启动游戏，最新版 dbi 会显示黑色背景）运行 dbi 即可。
+  原因是在 Applet 模式下（从相册启动，最新版 dbi 会显示蓝色背景）运行 dbi 时，可能会因为内存不足而导致解压缩失败，改为在 Title 或 Application 模式下（按住 R 键启动游戏，最新版 dbi 会显示黑色背景）运行 dbi 即可。
 
 ## 参考
 
