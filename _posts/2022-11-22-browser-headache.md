@@ -5,6 +5,13 @@ date:   2022-11-22 11:30:00 +0800
 categories: software browser
 ---
 
+> 更新大结局：Firefox 和 Chrome 先后出局，机器上只需要 Edge 就可以搞定全部了！
+
+  * 2023/04/11 公司的 PLM 支持 Edge 访问了。
+  * 2023/12/12 Edge 可以记住 Azure Devops Server 的访问密码了，具体原因不清楚，版本 120.0.2210.6。
+
+> 下面是原贴
+
 10+ 年的 FireFox 用户，最近碰到难题了，在公司特定的使用环境下。
 
 ## Mozilla FireFox
@@ -37,6 +44,7 @@ PLM 目前只认这个浏览器，没得跑了，但：
 * ~~浏览器设置菜单反应卡顿，但毕竟不像浏览页面那么常用，还不是完全不能忍。。。另两家完全没有这个问题。~~
   
   更新：今天研究前一个问题的时候，重置了下 Edge 的设置，然后发现后一个问题似乎突然消失了！再继续观察观察。
+
 
 <script src="https://utteranc.es/client.js"
         repo="yingang/yingang.github.io"
