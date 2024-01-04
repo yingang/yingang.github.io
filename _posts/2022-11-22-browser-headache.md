@@ -8,7 +8,7 @@ categories: software browser
 > 更新大结局：Firefox 和 Chrome 先后出局，机器上只需要 Edge 就可以搞定全部了！
 
   * 2023/04/11 公司的 PLM 支持 Edge 访问了。
-  * 2023/12/12 Edge 可以记住 Azure Devops Server 的访问密码了，具体原因不清楚，版本 120.0.2210.6。
+  * ~~2023/12/12 Edge 可以记住 Azure Devops Server 的访问密码了，具体原因不清楚，版本 120.0.2210.6。~~（后面很快就不行了，原因仍然不详。。。）
 
 > 下面是原贴
 
