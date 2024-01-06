@@ -14,7 +14,7 @@ from docx import Document
 doc = Document(filepath)
 for tbl in doc.tables:
   for row in tbl.rows:
-    value = row.cells[0].text.strip()
+    value = row.cells[0].text
     ...
 ~~~
 
@@ -70,6 +70,20 @@ class Table(Parented):
 也就是说，`row_cells` 引用的 `_cells` 看上去每次被调用时都在重新构建一个新的列表？？？
 
 不确定是否完全理解这些代码及其目的，尝试在自己的代码直接拿到 `_cells`，然后基于行列坐标自己去访问想要读取的 `cell`，结果对于上面说的那个 800 多行的表格，不到一秒就访问完了！差不多三个数量级的性能提升？
+
+示例代码如下，供参考：
+
+~~~python
+from docx import Document
+doc = Document(filepath)
+for tbl in doc.tables:
+  cells = tbl._cells
+  row_count = len(tbl.rows)
+  col_count = tbl._column_count
+  for row in range(0, row_count):
+    value = cells[row * col_count].text
+    ...
+~~~
 
 <script src="https://utteranc.es/client.js"
         repo="yingang/yingang.github.io"
