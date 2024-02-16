@@ -21,12 +21,14 @@ categories: game
 |Sun's Out Buns Out|2020/07|Free Updates|
 |Spring Festival/春节|2020/01|Free Updates|
 |Winter Wonderland|2019/12|Free Updates|
-|Carnival Of Chaos|2019/09|DLC|
-|Night Of Hangry Horde|2019/06|DLC|
-|Campfire Cook Off|2019/04|DLC|
+|Carnival Of Chaos|2019/09|DLC 3005|
+|Night Of Hangry Horde|2019/06|DLC 3004|
+|Campfire Cook Off|2019/04|DLC 3003|
 |Chinese New Year/农历新年|2019/02|Free Updates|
 |Kevin's Christmas Cracker|2018/12|Free Updates|
-|Surf 'N' Turf|2018/10|DLC|
+|Surf 'N' Turf|2018/10|DLC 3002|
+
+  另有 DLC 3001 的内容是 Too Many Cooks，只是增加厨师角色。
 
 ## Overcooked! 1
 
