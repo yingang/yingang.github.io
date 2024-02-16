@@ -5,7 +5,7 @@ date:   2020-06-01 21:21:00 +0800
 categories: c++ vs2019
 ---
 
-继续[前前一个帖子](https://yingang.github.io/strftime/tellg/2020/05/22/strftime-and-tellg.html)和[前一个帖子](https://yingang.github.io/vs2019/c++17/2020/05/27/hello-vs2019-and-c++17.html)中提到的日志解析小工具。 既然都改用 C++ 了，又抽空对性能做了一些优化，目前速度基本是受限于磁盘 IO 了，解析速度大概是最早 Python 版本的十倍左右，具体的优化点主要涉及如下几个方面：
+继续[前前一个帖子](https://yingang.github.io/c++/2020/05/22/strftime-and-tellg.html)和[前一个帖子](https://yingang.github.io/c++/vs2019/2020/05/27/hello-vs2019-and-c++17.html)中提到的日志解析小工具。 既然都改用 C++ 了，又抽空对性能做了一些优化，目前速度基本是受限于磁盘 IO 了，解析速度大概是最早 Python 版本的十倍左右，具体的优化点主要涉及如下几个方面：
 
 * 性能分析
 
@@ -37,7 +37,7 @@ categories: c++ vs2019
 
   这个是老调重弹了，根据实际的业务提前预留好空间，对性能的帮助还是挺大的，可以避免大量不必要的内存申请和拷贝。当然，很大一个前提是前面性能分析的结果，有的放矢。
 
-  包括[之前提到过的手工撸的 boost::join](https://yingang.github.io/vs2019/c++17/2020/05/27/hello-vs2019-and-c++17.html)，用 std::stringstream 和直接将一堆 std::string 加在一起的性能都不太好，最后还是先 reserve 好最终输出的 std::string 空间，然后一个个将素材 append 上去的性能是更快的。
+  包括[之前提到过的手工撸的 boost::join](https://yingang.github.io/c++/vs2019/2020/05/27/hello-vs2019-and-c++17.html)，用 std::stringstream 和直接将一堆 std::string 加在一起的性能都不太好，最后还是先 reserve 好最终输出的 std::string 空间，然后一个个将素材 append 上去的性能是更快的。
 
 上面这些做完之后，CPU 时间的分布比之前更平均一些，相对突出的几个，除了文件读写，主要是下面这两个，暂时没有动力进一步优化了：
 

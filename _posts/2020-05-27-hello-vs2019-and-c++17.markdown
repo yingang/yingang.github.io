@@ -5,7 +5,7 @@ date:   2020-05-27 16:21:00 +0800
 categories: c++ vs2019
 ---
 
-继续[前一个帖子](https://yingang.github.io/strftime/tellg/2020/05/22/strftime-and-tellg.html)中提到的日志解析小工具，最近正好装了 VS2019，想看看是不是 C++ 1x 基本可以代替掉对 boost 库的那些使用场景，毕竟只是个小工具，不希望有太多的外部依赖。
+继续[前一个帖子](https://yingang.github.io/c++/2020/05/22/strftime-and-tellg.html)中提到的日志解析小工具，最近正好装了 VS2019，想看看是不是 C++ 1x 基本可以代替掉对 boost 库的那些使用场景，毕竟只是个小工具，不希望有太多的外部依赖。
 
 * boost::filesystem
 

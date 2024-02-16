@@ -5,7 +5,7 @@ date:   2021-07-21 16:22:00 +0800
 categories: rust
 ---
 
-前些时间兴致勃勃地把 [The Rust Programming Language](https://doc.rust-lang.org/book/) 读完后（写得挺好，入门强烈推荐！），总觉得得实际用用才行，想了下，要不把[前面几个帖子](https://yingang.github.io/strftime/tellg/2020/05/22/strftime-and-tellg.html)提到的日志解析工具用 Rust 实现一遍吧：）
+前些时间兴致勃勃地把 [The Rust Programming Language](https://doc.rust-lang.org/book/) 读完后（写得挺好，入门强烈推荐！），总觉得得实际用用才行，想了下，要不把[前面几个帖子](https://yingang.github.io/c++/2020/05/22/strftime-and-tellg.html)提到的日志解析工具用 Rust 实现一遍吧：）
 
     What I can not create, I do not understand. -- Richard Feynman
 
@@ -17,7 +17,7 @@ categories: rust
 * 除了最大卖点的内存安全（Reliability）和系统级编程语言的性能（Performance），[Rust](https://rust-lang.org) 的生产力（Productivity）也是有保证的，前提是对语言和标准库等都有基本的熟悉；
 * 所以，初版完成后，比较方便地就实现了工具中一些计算密集型任务的并行处理，让分析过程和磁盘 I/O 尽可能互不干扰；
 * 再配合一个语言无关的设计优化（对同一个文件的大量小数据的写入性能远低于合并成少量大数据后的写入性能），工具的性能比 C++ 版本还有了不小的提升，即使 C++ 也用上同样的优化！
-* 说到性能调优部分，没有找到合适的办法做 Profiling，所以还是手工加日志来分析的，这方面没有之前[在 VS2019 中](https://yingang.github.io/vs2019/c++/2020/06/01/performance-improvement-for-c++-developed-utility.html)方便；
+* 说到性能调优部分，没有找到合适的办法做 Profiling，所以还是手工加日志来分析的，这方面没有之前[在 VS2019 中](https://yingang.github.io/c++/vs2019/2020/06/01/performance-improvement-for-c++-developed-utility.html)方便；
 * 对了，最终的 release 版本可执行文件，Rust 版本和 C++ 版本也是相当的（功能角度不完全一样，Rust 版本应该还稍多，但体积却小了约 12%）。
 
 其它：
