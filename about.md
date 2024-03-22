@@ -4,13 +4,11 @@ title: About
 permalink: /about/
 ---
 
-## About Me
-
 It's always a pleasure to record and share.
 
 YG
 
-## Links
+### Links
 
 * [《软件设计的哲学，第二版》中文翻译](https://yingang.github.io/aposd2e-zh/)
 * [《设计数据密集型应用》中文翻译](https://vonng.github.io/ddia)
