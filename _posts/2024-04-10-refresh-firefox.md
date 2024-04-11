@@ -16,8 +16,10 @@ categories: software browser
 过程还算快，因为之前使用了 Firefox 自带的账户同步功能，所以 Refresh 后很快就把类似历史记录、书签之类的都恢复了，但也有一些需要手工修改的东西，比如：
 
 * 是否允许网页自动播放视频和音频（可能变成了默认的设置，仅不允许自动播放音频）
-* 主界面布局（比如工具栏的各种按钮啥的）
+* 主界面布局（比如工具栏的各种按钮啥的，得重新摆一下）
 * 默认使用的搜索引擎（某度给我走开）
+* 屏蔽广告的插件 uBlock Origin 不见了（据说是[被迫在国内下架](https://www.zhihu.com/question/523163432)了，可以直接去 [Github](https://github.com/gorhill/uBlock/releases/) 上下载安装，找名字是 uBlock_****.firefox.signed.xpi 的就行）
+* `about:config` 里的设置也复原了（比如一直用的 `closeWindowWithLastTab = false`）
 
 但最重要的，Refresh 后确实我一开始的问题解决了！估计还是无数历史版本一路升级上来，保留了越来越多不那么兼容的配置吧。
 
