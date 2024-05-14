@@ -15,9 +15,9 @@ categories: python pyinstaller
   * 之前打包都是直接在虚拟环境中运行的，但实际运行的其实是全局 Python 环境中的 `PyInstaller`（其中从打包的运行日志中也能看出来，之前没往深处去想）
   * 之前打包的结果其实还挺正常，但这次不知为啥，多了一堆东西
 * 先尝试将全局 Python 环境中的所有库都删除（`pip freeze > req.txt` + `pip uninstall -r req.txt -y`）
-  * 并仍然在全局 Python 环境安装 PyInstaller
+  * 并仍然在全局 Python 环境安装 `PyInstaller`
   * 再次在虚拟环境中打包，结果很小，小到不能正常运行。。。看来不能这么用
-* 然后尝试在虚拟环境中安装 PyInstaller（再次删除了全局 Python 环境中的所有库，免得互相干扰）
+* 然后尝试在虚拟环境中安装 `PyInstaller`（再次删除了全局 Python 环境中的所有库，免得互相干扰）
   * 这次打包的结果对了，可以正常运行，体积也正常，从打包的运行日志也能看出来都是使用的虚拟环境中的信息
 
 <script src="https://utteranc.es/client.js"
