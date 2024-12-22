@@ -11,7 +11,7 @@ References:
 
 直接运行，有依赖缺失：
 
-     \>jekyll serve \--watch
+     \>jekyll serve --watch
      Traceback (most recent call last):
           5: from C:/Ruby25-x64/bin/jekyll:23:in `<main>'
           4: from C:/Ruby25-x64/bin/jekyll:23:in `load'
@@ -30,7 +30,7 @@ References:
 
 再次运行，仍然报错：
 
-     \>jekyll serve \--watch
+     \>jekyll serve --watch
 
      Configuration file: D:/Code/yingang.github.io/_config.yml
                Source: D:/Code/yingang.github.io
