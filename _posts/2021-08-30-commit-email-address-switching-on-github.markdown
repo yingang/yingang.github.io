@@ -2,7 +2,7 @@
 layout: post
 title:  "切换 GitHub 的提交邮件地址"
 date:   2021-08-30 20:09:00 +0800
-categories: github email
+categories: webapp github
 ---
 
 近期一边阅读学习民间翻译版的 [DDIA](https://github.com/Vonng/ddia/)，一边也参与了该翻译版的[校对](https://github.com/Vonng/ddia/commits?author=yingang)（除了明显的错误或不一致，其它觉得可能有问题或者不太明白的地方得对照英文版看下）。今天无意中发现我有一些最近的提交记录没有正确关联到我的 GitHub 账号（类似于 @帐户名 之类的，而是直接显示了一个非超链接形式的用户名称）。

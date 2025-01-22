@@ -2,7 +2,7 @@
 layout: post
 title:  "古董 Win7 上跑 .Net 应用的 TLS 版本问题"
 date:   2023-04-27 20:36:00 +0800
-categories: c# tls
+categories: dotnet tls
 ---
 
 ## 背景

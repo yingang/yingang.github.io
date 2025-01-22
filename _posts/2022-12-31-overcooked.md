@@ -2,7 +2,7 @@
 layout: post
 title:  "煮糊了！全配菜关卡"
 date:   2022-12-31 10:30:00 +0800
-categories: game
+categories: life game
 ---
 
 家人在 NS 上最爱的游戏（应该没有之一），于是仔细了解了下每个版本都出过哪些额外的关卡。

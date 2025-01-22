@@ -2,7 +2,7 @@
 layout: post
 title:  "尝试用 Sublime Text 取代 Notepad++"
 date:   2019-12-27 11:40:45 +0800
-categories: software notepad++
+categories: software editor
 ---
 
 再愤（Ai）青（Guo）一回。

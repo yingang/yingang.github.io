@@ -2,7 +2,7 @@
 layout: post
 title:  "对 C++ 开发的小工具进行性能优化"
 date:   2020-06-01 21:21:00 +0800
-categories: c++ vs2019
+categories: c++
 ---
 
 继续[前前一个帖子](https://yingang.github.io/c++/2020/05/22/strftime-and-tellg.html)和[前一个帖子](https://yingang.github.io/c++/vs2019/2020/05/27/hello-vs2019-and-c++17.html)中提到的日志解析小工具。 既然都改用 C++ 了，又抽空对性能做了一些优化，目前速度基本是受限于磁盘 IO 了，解析速度大概是最早 Python 版本的十倍左右，具体的优化点主要涉及如下几个方面：

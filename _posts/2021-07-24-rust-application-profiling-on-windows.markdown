@@ -2,7 +2,7 @@
 layout: post
 title:  "用 AMD μPerf 对 Rust 应用进行性能分析"
 date:   2021-07-24 09:55:00 +0800
-categories: rust profiling
+categories: rust
 ---
 
 [之前的帖子](https://yingang.github.io/rust/2021/07/21/log-parser-rewritten-in-rust.html)中提到当时不知道如何对 Rust 程序做 Profiling，后来在 [The Rust Performance Book](https://nnethercote.github.io/perf-book/profiling.html) 中找到了，也包括对各个开发平台推荐使用的工具，我是 Windows，选择不多，就用 AMD μPerf 吧。

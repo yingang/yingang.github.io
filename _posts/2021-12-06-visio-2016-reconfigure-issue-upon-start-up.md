@@ -2,7 +2,7 @@
 layout: post
 title:  "Visio 2016 总在启动时提示正在配置的问题"
 date:   2021-12-06 13:59:00 +0800
-categories: office visio 2016
+categories: office visio
 ---
 
 好像被这个问题困扰多年了，因为平时 Visio 用得不多，所以也不是太在意。最近又有碰到，就好奇上网搜索了一下：[有个帖子](https://social.technet.microsoft.com/Forums/office/en-US/5d15ba0c-bed2-4e9b-aa66-7966bb21d75c/every-time-i-start-visio-2016-i-get-quotplease-wait-while-windows-configures-visio-professional)说把注册表里 Visio 相关的几个文件类型（.vsd和.vsdx）删除掉再重启 Visio，应该就可以自动修复（至少有人回复说对他/她是有用的），备份好要删除的注册表内容后试了下，有点不幸，没用。。。帖子里有引用到另外一个微软网站的链接，但也是访问不了，疏于维护啊。

@@ -2,7 +2,7 @@
 layout: post
 title:  "在拥挤和变化的世界中茁壮成长：C++ 2006–2020"
 date:   2022-01-07 12:00:00 +0800
-categories: c++ hopl
+categories: c++
 ---
 
 最近阅读了 C++ 之父 Bjarne Stroustrup 的 [HOPL4](https://www.stroustrup.com/hopl20main-p5-p-bfc9cd4--final.pdf) 论文的中文版，也就是《[在拥挤和变化的世界中茁壮成长：C++ 2006–2020](https://github.com/Cpp-Club/Cxx_HOPL4_zh)》，翻译质量非常不错。

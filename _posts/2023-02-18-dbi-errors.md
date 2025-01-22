@@ -2,7 +2,7 @@
 layout: post
 title:  "dbi 常见报错处理"
 date:   2023-02-18 12:49:00 +0800
-categories: game switch
+categories: life game
 ---
 
 - `Cannot parse content meta. Corrupted file or old firmware`

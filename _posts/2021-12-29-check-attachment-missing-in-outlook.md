@@ -2,7 +2,7 @@
 layout: post
 title:  "用 VBA 检查 Outlook 遗忘添加附件的情况"
 date:   2021-12-29 18:53:00 +0800
-categories: office outlook vba
+categories: office outlook
 ---
 
 ### 背景

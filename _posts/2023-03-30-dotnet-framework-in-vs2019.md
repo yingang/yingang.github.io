@@ -2,7 +2,7 @@
 layout: post
 title:  "在 VS2019 中创建针对 .NET Framework 4.x 的应用"
 date:   2023-03-30 17:45:00 +0800
-categories: c# tfs
+categories: dotnet tfs
 ---
 
 ## 背景

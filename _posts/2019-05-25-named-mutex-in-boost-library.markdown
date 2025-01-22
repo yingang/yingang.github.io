@@ -2,7 +2,7 @@
 layout: post
 title:  "Named Mutex in boost C++ library"
 date:   2019-05-25 18:09:45 +0800
-categories: c++ boost named_mutex
+categories: c++ boost
 ---
 
 ### 问题
