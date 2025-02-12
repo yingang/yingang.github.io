@@ -4,6 +4,7 @@ title: About
 permalink: /about/
 ---
 
+* 2025.01 [《Effective Rust 中文版》](https://rustx-labs.github.io/effective-rust-cn)
 * 2024.04 [《现代艺术 150 年：一个未完成的故事》提及作品图集](https://yingang.github.io/modern-art-150-years/)
 * 2024.03 [《软件设计的哲学，第二版》中文翻译](https://yingang.github.io/aposd2e-zh/)
 * 2024.02 [《软件设计的哲学，第一版》中文翻译](https://yingang.github.io/aposd-zh)
