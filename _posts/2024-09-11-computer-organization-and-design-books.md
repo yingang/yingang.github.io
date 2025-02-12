@@ -9,7 +9,7 @@ categories: book
 
 ![](/images/computer-organization-and-design-risc-v-edition.jpg)
 
-2020 年出版的《计算机组成与设计：硬件/软件接口（原书第5版）》，翻译的版本是 2018 年的 RISC-V 版本。
+2020 年出版的《计算机组成与设计：硬件/软件接口（原书第5版）》，翻译的版本是 2018 年的 RISC-V Edition。
 
 ![](/images/computer-organization-and-design-risc-v-edition-zh.jpg)
 
