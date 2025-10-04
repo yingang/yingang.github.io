@@ -23,7 +23,7 @@ categories: mac
 
 ## 文件办公
 
-1. 免费的 WPS Office 就足够了，不需要微软的 Office。
+1. 免费的 [WPS Office](https://zh-hant.wps.com/download/) 就足够了，不需要微软的 Office。
 
 2. 压缩文件的处理，7z 似乎没有 Mac 版，没找到合适的替代软件，但无意中发现 WPS 居然还支持 .rar 等压缩文件的解压，令人欣喜的不务正业。
 
@@ -43,4 +43,11 @@ categories: mac
 
 1. 之前在 Windows 下用的 qBittorrent 也有 Mac 版，继续用就好了。
 
-2. 一直在 Mac 上使用的 IINA，最近才发现不支持 Dolby Vision，后面得注意下，另外也在[这里](https://www.zhihu.com/question/470187352/answer/3418773337)学习到一招，直接在 IINA 里调节色调也能将就看，但因为是个全局的设定，感觉也不够好用。
+2. 一直在 Mac 上使用的 [IINA](https://iina.io/)，最近才发现不支持 Dolby Vision，后面得注意下，另外也在[这里](https://www.zhihu.com/question/470187352/answer/3418773337)学习到一招，直接在 IINA 里调节色调也能将就看，但因为是个全局的设定，感觉也不够好用。
+
+3. MTP 传输，先是装了 Commander One，结果没几天发现收费版本才能用到相关的功能，只好先装 Homebrew（参照[这里](https://blog.csdn.net/weixin_63310665/article/details/143313410)用下面的命令安装的，也设置了国内的源），再安装里面的 Android 文件传输（`brew install --cask android-file-transfer`）。
+
+    ```
+    /bin/zsh -c "$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)"
+    ```
+
