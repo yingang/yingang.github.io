@@ -41,6 +41,16 @@ categories: mac
 
     然后因为我的 Mac mini 是外接了一个移动硬盘，网络共享里默认是看不到上面的共享文件夹的，需要在“系统设置 -> 隐私与安全性 -> 完全磁盘访问权限”中允许 `smbd`，这个是从[这里](https://apple.stackexchange.com/questions/472836/how-to-share-a-folder-stored-on-an-external-usb-drive)学到的。
 
+### 还没搞定的问题
+
+1. 外接硬盘的文件系统格式
+
+    默认用了 exFat，但会有一个问题是在比如 VS Code 下，编辑任何文件都会生成 `._` 开头的文件，[据说](https://www.zhihu.com/question/398260618/answer/3143436699)也不是备份文件。考虑下要不要换成 APFS，还不确定 Windows 的可操作性怎么样。
+
+2. GitHub 访问不畅
+
+    之前在 Windows 下一直用的 fastgithub 不好使了，运行就报错，暂时没找到解决方法。
+
 ## 游戏娱乐
 
 1. 之前在 Windows 下用的 qBittorrent 也有 Mac 版，继续用就好了。
