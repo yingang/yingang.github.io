@@ -27,6 +27,8 @@ categories: mac
 
 2. 压缩文件的处理，7z 似乎没有 Mac 版，没找到合适的替代软件，但无意中发现 WPS 居然还支持 .rar 等压缩文件的解压，令人欣喜的不务正业。
 
+    > 后来发现有个叫 Keka 的软件口碑不错，其[官网](https://www.keka.io/zh-cn/)上直接可下载，不一定要去 App Store 下载付费版本。
+
 3. 从终端直接运行 `code` 来启动 VS Code，需要先在 VS Code 里执行：`Shell Command: Install ‘code’ command in PATH`，这个是从[这里](https://zhuanlan.zhihu.com/p/642745004)学到的。
 
 4. 中断终端里的程序执行，`Command + .`。
