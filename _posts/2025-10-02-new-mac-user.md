@@ -23,7 +23,7 @@ categories: mac
 
 ## 文件办公
 
-1. 免费的 [WPS Office](https://zh-hant.wps.com/download/) 就足够了，不需要微软的 Office。
+1. 免费的 [WPS Office](https://zh-hant.wps.com/download/) 就足够了，不需要微软的 Office 套件。
 
 2. 压缩文件的处理，7z 似乎没有 Mac 版，没找到合适的替代软件，但无意中发现 WPS 居然还支持 .rar 等压缩文件的解压，令人欣喜的不务正业。
 
@@ -40,6 +40,13 @@ categories: mac
     需要注意在同一个地方的“选项”里，针对“Windows文件共享”进行设置。
 
     然后因为我的 Mac mini 是外接了一个移动硬盘，网络共享里默认是看不到上面的共享文件夹的，需要在“系统设置 -> 隐私与安全性 -> 完全磁盘访问权限”中允许 `smbd`，这个是从[这里](https://apple.stackexchange.com/questions/472836/how-to-share-a-folder-stored-on-an-external-usb-drive)学到的。
+
+6. 浏览文件夹下的照片，相比 Windows 上不管用啥软件都挺方便，Mac 上目前有两个方法，总体算是勉强可用吧：
+
+    * 选中所有想要浏览的照片，双击，就可以在“预览”应用中浏览了。不那么方便，但优点是可以同时查看 EXIF 信息。
+    * 在任意一张照片上按住空格别松开，也可以同时用方向键进行浏览。有点费手，但还算方便，只是又看不了 EXIF 信息。
+
+    ps. 方法二有个附带的好处，不止能预览照片，文档也是可以的！
 
 ### 还没搞定的问题
 
