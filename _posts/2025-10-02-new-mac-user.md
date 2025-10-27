@@ -7,7 +7,7 @@ categories: mac
 
 家里唯一一台 Windows 笔记本服役已经超过十年，还是决定在海鲜市场出掉了，这样才能把基本闲置的 Mac mini 4 给用起来，过程中碰到不少问题，找个地方记录下。
 
-## 鼠标键盘
+### 键鼠操作
 
 因为日常工作还是基于 Windows 环境，所以实在没法接受在两种鼠标键盘操作习惯中来回切换。
 
@@ -17,23 +17,38 @@ categories: mac
 
     同时带来一个后果，本来还算顺手的 Command + Tab 也得改到左边用 Ctrl + Tab 了，两害相权取其轻吧。
 
-2. 鼠标的滚动方向。
+1. 鼠标的滚动方向。
 
     具体位置：系统设置 -> 鼠标 -> 自然滚动，取消掉就好了。
 
-## 文件办公
+### 办公软件 
 
-1. 免费的 [WPS Office](https://zh-hant.wps.com/download/) 就足够了，不需要微软的 Office 套件。
+1. WORD 和 Excel 文件编辑，免费的 [WPS Office](https://zh-hant.wps.com/download/) 就足够了，不需要微软的 Office 套件。
 
-2. 压缩文件的处理，7z 似乎没有 Mac 版，没找到合适的替代软件，但无意中发现 WPS 居然还支持 .rar 等压缩文件的解压，令人欣喜的不务正业。
+1. 压缩文件的处理，7z 似乎没有 Mac 版，没找到合适的替代软件，但无意中发现 WPS 居然还支持 .rar 等压缩文件的解压，令人欣喜的不务正业。
 
     > 后来发现有个叫 Keka 的软件口碑不错，其[官网](https://www.keka.io/zh-cn/)上直接可下载，不一定要去 App Store 下载付费版本。
 
-3. 从终端直接运行 `code` 来启动 VS Code，需要先在 VS Code 里执行：`Shell Command: Install ‘code’ command in PATH`，这个是从[这里](https://zhuanlan.zhihu.com/p/642745004)学到的。
+1. 系统自带的图书应用对 EPUB 格式的处理很好，至少比之前用过的 SumatraPDF 和微信读书都要好，果然基因不一样。
 
-4. 中断终端里的程序执行，`Command + .`。
+### 影音娱乐
 
-5. 网络文件共享，主要用来在家里电视上访问电脑里的视频文件。
+1. 文件夹下的照片浏览，相比较在 Windows 上用自带的软件就挺方便，Mac 上目前有两个方法，但加一起也只能算是勉强可用吧：
+
+    * 选中所有想要浏览的照片，双击，就可以在“预览”应用中浏览了。不那么方便，但要同时查看 EXIF 信息的话似乎只能这么操作。
+    * 在任意一张照片上按住空格键别松开，就可以同时用方向键进行浏览了。有点费手，但还算方便，只是又看不了 EXIF 信息了。附带的好处是不止能浏览照片，文档也是可以的！另外感觉这个操作方式就是个 hack，如果是在网格显示方式下，都没法顺序浏览，只能左右来回移，所谓所移即所见。。。
+
+1. 本地视频播放，一直在 Mac 上使用的 [IINA](https://iina.io/)，最近才发现不支持 Dolby Vision，后面得注意下，另外也在[这里](https://www.zhihu.com/question/470187352/answer/3418773337)学习到一招，直接在 IINA 里调节色调也能将就看，但因为是个全局的设定，感觉也不够好用。
+
+### 开发套件
+
+1. 想要从终端直接运行 `code` 来启动 VS Code，需要先在 VS Code 里执行：`Shell Command: Install ‘code’ command in PATH`，这个是从[这里](https://zhuanlan.zhihu.com/p/642745004)学到的。
+
+1. 想要中断终端里的程序执行，`Command + .`。
+
+### 互联互通
+
+1. 网络文件共享，主要用来在家里的电视或其他设备上访问电脑里的视频文件。
 
     具体位置：系统设置 -> 通用 -> 共享 -> 文件共享，可以按需添加想要共享的文件夹。
 
@@ -41,10 +56,13 @@ categories: mac
 
     然后因为我的 Mac mini 是外接了一个移动硬盘，网络共享里默认是看不到上面的共享文件夹的，需要在“系统设置 -> 隐私与安全性 -> 完全磁盘访问权限”中允许 `smbd`，这个是从[这里](https://apple.stackexchange.com/questions/472836/how-to-share-a-folder-stored-on-an-external-usb-drive)学到的。
 
-6. 浏览文件夹下的照片，相比 Windows 上用自带的软件都挺方便，Mac 上目前有两个方法，但也只能算是勉强可用吧：
+1. BT 下载，之前在 Windows 下用的 qBittorrent 也有 Mac 版，继续用就好了。
 
-    * 选中所有想要浏览的照片，双击，就可以在“预览”应用中浏览了。不那么方便，但要同时查看 EXIF 信息的话似乎只能这么操作。
-    * 在任意一张照片上按住空格键别松开，就可以同时用方向键进行浏览了。有点费手，但还算方便，只是又看不了 EXIF 信息了。附带的好处是不止能浏览照片，文档也是可以的！另外感觉这个操作方式就是个 hack，如果是在网格显示方式下，都没法顺序浏览，只能左右来回移，所谓所移即所见。。。
+1. MTP 传输，先是装了 Commander One，结果没几天发现收费版本才能用到相关的功能，只好先装 Homebrew（参照[这里](https://blog.csdn.net/weixin_63310665/article/details/143313410)用下面的命令安装的，也设置了国内的源），再安装里面的 Android 文件传输（`brew install --cask android-file-transfer`）。
+
+    ```
+    /bin/zsh -c "$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)"
+    ```
 
 ### 还没搞定的问题
 
@@ -52,19 +70,7 @@ categories: mac
 
     默认用了 exFat，但会有一个问题是在比如 VS Code 下，编辑任何文件都会生成 `._` 开头的文件，[据说](https://www.zhihu.com/question/398260618/answer/3143436699)也不是备份文件。考虑下要不要换成 APFS，还不确定 Windows 的可操作性怎么样。
 
-2. GitHub 访问不畅
+1. GitHub 访问不畅
 
     之前在 Windows 下一直用的 fastgithub 不好使了，运行就报错，暂时没找到解决方法。
-
-## 游戏娱乐
-
-1. 之前在 Windows 下用的 qBittorrent 也有 Mac 版，继续用就好了。
-
-2. 一直在 Mac 上使用的 [IINA](https://iina.io/)，最近才发现不支持 Dolby Vision，后面得注意下，另外也在[这里](https://www.zhihu.com/question/470187352/answer/3418773337)学习到一招，直接在 IINA 里调节色调也能将就看，但因为是个全局的设定，感觉也不够好用。
-
-3. MTP 传输，先是装了 Commander One，结果没几天发现收费版本才能用到相关的功能，只好先装 Homebrew（参照[这里](https://blog.csdn.net/weixin_63310665/article/details/143313410)用下面的命令安装的，也设置了国内的源），再安装里面的 Android 文件传输（`brew install --cask android-file-transfer`）。
-
-    ```
-    /bin/zsh -c "$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)"
-    ```
 
