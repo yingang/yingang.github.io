@@ -4,6 +4,7 @@ title: About
 permalink: /about/
 ---
 
+* 2026.05 [《战争与和平》主要人物关系图](https://yingang.github.io/war-and-peace.html)
 * 2025.01 [《Effective Rust 中文版》](https://yingang.github.io/effective-rust-cn/)
 * 2024.04 [《现代艺术 150 年：一个未完成的故事》提及作品图集](https://yingang.github.io/modern-art-150-years/)
 * 2024.03 [《软件设计的哲学，第二版》中文翻译](https://yingang.github.io/aposd2e-zh/)

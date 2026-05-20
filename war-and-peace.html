@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>《战争与和平》人物关系图谱</title>
+    <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: #1a1a2e;
+            color: #eee;
+            overflow: hidden;
+        }
+
+        #app {
+            display: flex;
+            height: 100vh;
+        }
+
+        #sidebar {
+            width: 280px;
+            background: #16213e;
+            padding: 20px;
+            overflow-y: auto;
+            border-right: 1px solid #0f3460;
+            flex-shrink: 0;
+        }
+
+        #sidebar h1 {
+            font-size: 18px;
+            margin-bottom: 16px;
+            color: #e94560;
+            text-align: center;
+            border-bottom: 1px solid #0f3460;
+            padding-bottom: 12px;
+        }
+
+        .legend-section {
+            margin-bottom: 16px;
+        }
+
+        .legend-section h3 {
+            font-size: 13px;
+            color: #aaa;
+            margin-bottom: 8px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .legend-item:hover {
+            background: #0f3460;
+        }
+
+        .legend-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .legend-line {
+            width: 24px;
+            height: 3px;
+            margin-right: 10px;
+            flex-shrink: 0;
+            border-radius: 2px;
+        }
+
+        .legend-line.dashed {
+            background: repeating-linear-gradient(
+                90deg,
+                currentColor 0px,
+                currentColor 4px,
+                transparent 4px,
+                transparent 7px
+            );
+            height: 2px;
+        }
+
+        #network {
+            flex: 1;
+            height: 100vh;
+        }
+
+        #info-panel {
+            display: none;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 300px;
+            background: rgba(22, 33, 62, 0.95);
+            border: 1px solid #0f3460;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            z-index: 100;
+        }
+
+        #info-panel h2 {
+            color: #e94560;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        #info-panel p {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #ccc;
+        }
+
+        #info-panel .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 14px;
+            cursor: pointer;
+            color: #888;
+            font-size: 18px;
+        }
+
+        #info-panel .close-btn:hover {
+            color: #e94560;
+        }
+
+        .controls {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            gap: 8px;
+            z-index: 50;
+        }
+
+        .controls button {
+            background: #16213e;
+            border: 1px solid #0f3460;
+            color: #eee;
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+
+        .controls button:hover {
+            background: #0f3460;
+            border-color: #e94560;
+        }
+
+        .filter-section {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #0f3460;
+        }
+
+        .filter-section h3 {
+            font-size: 13px;
+            color: #aaa;
+            margin-bottom: 8px;
+        }
+
+        .filter-btn {
+            display: inline-block;
+            padding: 4px 10px;
+            margin: 3px;
+            font-size: 11px;
+            border-radius: 12px;
+            cursor: pointer;
+            border: 1px solid;
+            transition: all 0.2s;
+        }
+
+        .filter-btn.active {
+            opacity: 1;
+        }
+
+        .filter-btn.inactive {
+            opacity: 0.4;
+        }
+
+        #search-box {
+            width: 100%;
+            padding: 8px 12px;
+            background: #0f3460;
+            border: 1px solid #1a4080;
+            border-radius: 6px;
+            color: #eee;
+            font-size: 13px;
+            margin-bottom: 16px;
+            outline: none;
+        }
+
+        #search-box::placeholder {
+            color: #666;
+        }
+
+        #search-box:focus {
+            border-color: #e94560;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div id="sidebar">
+            <h1>《战争与和平》<br>人物关系图谱</h1>
+
+            <input type="text" id="search-box" placeholder="搜索人物...">
+
+            <div class="legend-section">
+                <h3>家族</h3>
+                <div class="legend-item" data-family="rostov">
+                    <span class="legend-dot" style="background: #4ecdc4;"></span>
+                    罗斯托夫家族
+                </div>
+                <div class="legend-item" data-family="bolkonsky">
+                    <span class="legend-dot" style="background: #ffe66d;"></span>
+                    博尔孔斯基家族
+                </div>
+                <div class="legend-item" data-family="bezukhov">
+                    <span class="legend-dot" style="background: #ff6b6b;"></span>
+                    别祖霍夫家族
+                </div>
+                <div class="legend-item" data-family="kuragin">
+                    <span class="legend-dot" style="background: #c44dff;"></span>
+                    库拉金家族
+                </div>
+                <div class="legend-item" data-family="drubetskoy">
+                    <span class="legend-dot" style="background: #45b7d1;"></span>
+                    德鲁别茨科伊家族
+                </div>
+                <div class="legend-item" data-family="other">
+                    <span class="legend-dot" style="background: #96ceb4;"></span>
+                    其他重要人物
+                </div>
+            </div>
+
+            <div class="legend-section">
+                <h3>关系类型</h3>
+                <div class="legend-item">
+                    <span class="legend-line" style="background: #e94560;"></span>
+                    夫妻/恋人
+                </div>
+                <div class="legend-item">
+                    <span class="legend-line" style="background: #4ecdc4;"></span>
+                    亲子关系
+                </div>
+                <div class="legend-item">
+                    <span class="legend-line" style="background: #ffe66d;"></span>
+                    兄弟姐妹
+                </div>
+                <div class="legend-item">
+                    <span class="legend-line" style="background: #45b7d1;"></span>
+                    友谊
+                </div>
+                <div class="legend-item">
+                    <span class="legend-line dashed" style="color: #ff6b6b;"></span>
+                    对立/冲突
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h3>显示控制</h3>
+                <div id="family-filters"></div>
+            </div>
+        </div>
+
+        <div id="network"></div>
+
+        <div id="info-panel">
+            <span class="close-btn" onclick="closeInfoPanel()">&times;</span>
+            <h2 id="info-name"></h2>
+            <p id="info-desc"></p>
+        </div>
+
+        <div class="controls">
+            <button onclick="resetView()">重置视图</button>
+            <button id="physics-btn" onclick="togglePhysics()">物理引擎：开</button>
+        </div>
+    </div>
+
+    <script>
+        // Character data
+        const characters = [
+            // 罗斯托夫家族
+            { id: 1, label: "伊利亚·罗斯托夫伯爵", family: "rostov", desc: "罗斯托夫家族的家长，性格豪爽、慷慨大方，但不善理财，最终导致家族经济困难。" },
+            { id: 2, label: "罗斯托夫伯爵夫人", family: "rostov", desc: "伊利亚伯爵的妻子，深爱子女，尤其溺爱小儿子彼佳。" },
+            { id: 3, label: "尼古拉·罗斯托夫", family: "rostov", desc: "罗斯托夫家长子，性格正直勇敢，参军作战，最终与玛丽亚公爵小姐结婚。" },
+            { id: 4, label: "娜塔莎·罗斯托娃", family: "rostov", desc: "罗斯托夫家的女儿，天真活泼、热情洋溢，先与安德烈订婚（后解除），最终嫁给皮埃尔。" },
+            { id: 5, label: "彼佳·罗斯托夫", family: "rostov", desc: "罗斯托夫家最小的儿子，年少从军，在战争中英勇牺牲。" },
+            { id: 6, label: "薇拉·罗斯托娃", family: "rostov", desc: "罗斯托夫家的长女，性格严肃刻板，嫁给了贝格。" },
+            { id: 7, label: "索尼娅", family: "rostov", desc: "罗斯托夫家的养女（远亲），深爱尼古拉但未能如愿，一生未嫁。" },
+
+            // 博尔孔斯基家族
+            { id: 10, label: "尼古拉·博尔孔斯基老公爵", family: "bolkonsky", desc: "安德烈和玛丽亚的父亲，性格严厉古怪，退休将军，学识渊博但专制。" },
+            { id: 11, label: "安德烈·博尔孔斯基公爵", family: "bolkonsky", desc: "老公爵之子，聪明高傲、追求荣誉，在战争中受伤去世。是书中最复杂的角色之一。" },
+            { id: 12, label: "玛丽亚·博尔孔斯卡娅", family: "bolkonsky", desc: "安德烈的妹妹，虔诚善良，照顾严厉的父亲，最终与尼古拉·罗斯托夫结婚。" },
+            { id: 13, label: "丽莎（小公爵夫人）", family: "bolkonsky", desc: "安德烈的第一任妻子，在生下儿子尼古连卡后去世。" },
+            { id: 14, label: "尼古连卡", family: "bolkonsky", desc: "安德烈与丽莎之子，在父亲去世后由家人抚养。" },
+
+            // 别祖霍夫家族
+            { id: 20, label: "皮埃尔·别祖霍夫", family: "bezukhov", desc: "全书主人公之一，继承巨额遗产的私生子。善良笨拙、不断追寻人生意义，经历战争洗礼后找到内心平静。" },
+            { id: 21, label: "基里尔·别祖霍夫伯爵", family: "bezukhov", desc: "皮埃尔的父亲，莫斯科有名的富翁，临终前将遗产留给私生子皮埃尔。" },
+
+            // 库拉金家族
+            { id: 30, label: "瓦西里·库拉金公爵", family: "kuragin", desc: "老谋深算的社交界人物，一心为子女谋求有利婚姻和社会地位。" },
+            { id: 31, label: "海伦·库拉金娜", family: "kuragin", desc: "瓦西里之女，美貌但浅薄堕落，嫁给皮埃尔后不忠，最终暴死。" },
+            { id: 32, label: "阿纳托利·库拉金", family: "kuragin", desc: "瓦西里之子，放荡不羁，曾试图拐骗已订婚的娜塔莎私奔。" },
+            { id: 33, label: "伊波利特·库拉金", family: "kuragin", desc: "瓦西里的长子，愚蠢可笑的外交官。" },
+
+            // 德鲁别茨科伊家族
+            { id: 40, label: "安娜·德鲁别茨卡娅公爵夫人", family: "drubetskoy", desc: "鲍里斯的母亲，家境贫困但善于利用社交关系为儿子谋取前程。" },
+            { id: 41, label: "鲍里斯·德鲁别茨科伊", family: "drubetskoy", desc: "安娜之子，野心勃勃、善于钻营，在军队和社交界步步高升。" },
+
+            // 其他重要人物
+            { id: 50, label: "库图佐夫", family: "other", desc: "俄军总司令，年迈睿智，坚持持久战略，最终击败拿破仑。象征俄国人民的智慧。" },
+            { id: 51, label: "拿破仑", family: "other", desc: "法国皇帝，入侵俄国。在书中代表虚假的伟大和历史宿命论的反面。" },
+            { id: 52, label: "杰尼索夫", family: "other", desc: "尼古拉的战友和好友，曾向娜塔莎求婚被拒，后成为游击队指挥官。" },
+            { id: 53, label: "多洛霍夫", family: "other", desc: "勇猛冷酷的军官，与海伦有染，在决斗中被皮埃尔击伤。" },
+            { id: 54, label: "贝格", family: "other", desc: "一个精明务实的军官，娶了薇拉·罗斯托娃。" },
+            { id: 55, label: "普拉东·卡拉塔耶夫", family: "other", desc: "皮埃尔在战俘营中结识的俄国农民，代表俄国人民的朴素智慧和善良。" },
+            { id: 56, label: "安娜·舍勒", family: "other", desc: "彼得堡社交界女主人，小说开篇人物，代表上流社会的虚伪。" },
+        ];
+
+        // Relationship data
+        const relationships = [
+            // 罗斯托夫家族内部
+            { from: 1, to: 2, label: "夫妻", type: "marriage" },
+            { from: 1, to: 3, label: "父子", type: "parent" },
+            { from: 1, to: 4, label: "父女", type: "parent" },
+            { from: 1, to: 5, label: "父子", type: "parent" },
+            { from: 1, to: 6, label: "父女", type: "parent" },
+            { from: 2, to: 7, label: "养母", type: "parent" },
+            { from: 3, to: 4, label: "兄妹", type: "sibling" },
+            { from: 3, to: 5, label: "兄弟", type: "sibling" },
+            { from: 4, to: 5, label: "姐弟", type: "sibling" },
+
+            // 博尔孔斯基家族内部
+            { from: 10, to: 11, label: "父子", type: "parent" },
+            { from: 10, to: 12, label: "父女", type: "parent" },
+            { from: 11, to: 12, label: "兄妹", type: "sibling" },
+            { from: 11, to: 13, label: "夫妻", type: "marriage" },
+            { from: 11, to: 14, label: "父子", type: "parent" },
+            { from: 13, to: 14, label: "母子", type: "parent" },
+
+            // 别祖霍夫家族
+            { from: 21, to: 20, label: "父子", type: "parent" },
+
+            // 库拉金家族内部
+            { from: 30, to: 31, label: "父女", type: "parent" },
+            { from: 30, to: 32, label: "父子", type: "parent" },
+            { from: 30, to: 33, label: "父子", type: "parent" },
+            { from: 31, to: 32, label: "姐弟", type: "sibling" },
+
+            // 德鲁别茨科伊家族
+            { from: 40, to: 41, label: "母子", type: "parent" },
+
+            // 跨家族关系 - 婚姻/恋爱
+            { from: 20, to: 31, label: "前夫妻", type: "marriage" },
+            { from: 20, to: 4, label: "夫妻", type: "marriage" },
+            { from: 11, to: 4, label: "曾订婚", type: "marriage" },
+            { from: 3, to: 12, label: "夫妻", type: "marriage" },
+            { from: 6, to: 54, label: "夫妻", type: "marriage" },
+            { from: 32, to: 4, label: "诱骗私奔", type: "conflict" },
+            { from: 3, to: 7, label: "单恋", type: "marriage" },
+            { from: 52, to: 4, label: "曾求婚", type: "marriage" },
+            { from: 41, to: 4, label: "曾追求", type: "marriage" },
+
+            // 友谊
+            { from: 20, to: 11, label: "挚友", type: "friendship" },
+            { from: 3, to: 52, label: "战友", type: "friendship" },
+            { from: 20, to: 55, label: "精神导师", type: "friendship" },
+            { from: 41, to: 3, label: "少年友谊", type: "friendship" },
+
+            // 冲突
+            { from: 20, to: 53, label: "决斗", type: "conflict" },
+            { from: 53, to: 31, label: "情人", type: "conflict" },
+            { from: 50, to: 51, label: "对战", type: "conflict" },
+
+            // 其他社交关系
+            { from: 30, to: 20, label: "觊觎遗产", type: "conflict" },
+            { from: 30, to: 12, label: "曾为子求婚", type: "conflict" },
+        ];
+
+        // Color scheme
+        const familyColors = {
+            rostov: { background: "#4ecdc4", border: "#3db8b0", highlight: { background: "#6fe8e0", border: "#4ecdc4" } },
+            bolkonsky: { background: "#ffe66d", border: "#e6cf5a", highlight: { background: "#fff09a", border: "#ffe66d" } },
+            bezukhov: { background: "#ff6b6b", border: "#e65555", highlight: { background: "#ff9999", border: "#ff6b6b" } },
+            kuragin: { background: "#c44dff", border: "#a33dd6", highlight: { background: "#d580ff", border: "#c44dff" } },
+            drubetskoy: { background: "#45b7d1", border: "#3a9bb2", highlight: { background: "#70cce0", border: "#45b7d1" } },
+            other: { background: "#96ceb4", border: "#7ab89c", highlight: { background: "#b5e0cc", border: "#96ceb4" } }
+        };
+
+        const edgeColors = {
+            marriage: "#e94560",
+            parent: "#4ecdc4",
+            sibling: "#ffe66d",
+            friendship: "#45b7d1",
+            conflict: "#ff6b6b"
+        };
+
+        const familyNames = {
+            rostov: "罗斯托夫",
+            bolkonsky: "博尔孔斯基",
+            bezukhov: "别祖霍夫",
+            kuragin: "库拉金",
+            drubetskoy: "德鲁别茨科伊",
+            other: "其他"
+        };
+
+        // Build nodes
+        const nodes = new vis.DataSet(characters.map(c => ({
+            id: c.id,
+            label: c.label,
+            group: c.family,
+            title: c.desc,
+            color: familyColors[c.family],
+            font: { color: "#eee", size: 13, face: "Microsoft YaHei", strokeWidth: 2, strokeColor: "#1a1a2e" },
+            shape: "dot",
+            size: c.id === 20 || c.id === 11 || c.id === 4 ? 28 : (c.id === 50 || c.id === 51 ? 24 : 18),
+            borderWidth: 2,
+            shadow: true
+        })));
+
+        // Build edges
+        const edges = new vis.DataSet(relationships.map((r, i) => ({
+            id: i,
+            from: r.from,
+            to: r.to,
+            label: r.label,
+            color: { color: edgeColors[r.type], highlight: edgeColors[r.type], hover: edgeColors[r.type] },
+            font: { color: "#aaa", size: 10, strokeWidth: 2, strokeColor: "#1a1a2e" },
+            width: r.type === "marriage" ? 2.5 : 1.5,
+            dashes: r.type === "conflict" ? [5, 5] : false,
+            smooth: { type: "continuous", roundness: 0.2 },
+            arrows: r.type === "parent" ? { to: { enabled: true, scaleFactor: 0.6 } } : undefined
+        })));
+
+        // Network options
+        const options = {
+            physics: {
+                enabled: true,
+                forceAtlas2Based: {
+                    gravitationalConstant: -60,
+                    centralGravity: 0.008,
+                    springLength: 160,
+                    springConstant: 0.03,
+                    damping: 0.5
+                },
+                solver: "forceAtlas2Based",
+                stabilization: { iterations: 200 }
+            },
+            interaction: {
+                hover: true,
+                tooltipDelay: 200,
+                dragNodes: true,
+                dragView: true,
+                zoomView: true,
+                navigationButtons: false
+            },
+            nodes: {
+                font: { size: 13 },
+                borderWidth: 2,
+                shadow: { enabled: true, color: "rgba(0,0,0,0.3)", size: 8 }
+            },
+            edges: {
+                smooth: { type: "continuous" },
+                font: { size: 10, align: "middle" }
+            },
+            groups: {
+                rostov: { color: familyColors.rostov },
+                bolkonsky: { color: familyColors.bolkonsky },
+                bezukhov: { color: familyColors.bezukhov },
+                kuragin: { color: familyColors.kuragin },
+                drubetskoy: { color: familyColors.drubetskoy },
+                other: { color: familyColors.other }
+            }
+        };
+
+        // Initialize network
+        const container = document.getElementById("network");
+        const data = { nodes, edges };
+        const network = new vis.Network(container, data, options);
+
+        // Active family filters
+        const activeFilters = new Set(Object.keys(familyColors));
+
+        // Generate filter buttons
+        const filterContainer = document.getElementById("family-filters");
+        Object.entries(familyNames).forEach(([key, name]) => {
+            const btn = document.createElement("span");
+            btn.className = "filter-btn active";
+            btn.style.borderColor = familyColors[key].background;
+            btn.style.color = familyColors[key].background;
+            btn.textContent = name;
+            btn.dataset.family = key;
+            btn.addEventListener("click", () => toggleFamily(key, btn));
+            filterContainer.appendChild(btn);
+        });
+
+        function toggleFamily(family, btn) {
+            if (activeFilters.has(family)) {
+                activeFilters.delete(family);
+                btn.className = "filter-btn inactive";
+            } else {
+                activeFilters.add(family);
+                btn.className = "filter-btn active";
+            }
+            applyFilters();
+        }
+
+        function applyFilters() {
+            const visibleNodeIds = new Set();
+            characters.forEach(c => {
+                if (activeFilters.has(c.family)) {
+                    visibleNodeIds.add(c.id);
+                    nodes.update({ id: c.id, hidden: false });
+                } else {
+                    nodes.update({ id: c.id, hidden: true });
+                }
+            });
+
+            relationships.forEach((r, i) => {
+                const visible = visibleNodeIds.has(r.from) && visibleNodeIds.has(r.to);
+                edges.update({ id: i, hidden: !visible });
+            });
+        }
+
+        // Click event - show info panel
+        network.on("click", function (params) {
+            if (params.nodes.length > 0) {
+                const nodeId = params.nodes[0];
+                const character = characters.find(c => c.id === nodeId);
+                if (character) {
+                    document.getElementById("info-name").textContent = character.label;
+                    document.getElementById("info-desc").textContent = character.desc;
+                    document.getElementById("info-panel").style.display = "block";
+                }
+            } else {
+                closeInfoPanel();
+            }
+        });
+
+        // Double-click to focus on neighbors
+        network.on("doubleClick", function (params) {
+            if (params.nodes.length > 0) {
+                const nodeId = params.nodes[0];
+                const connectedNodes = network.getConnectedNodes(nodeId);
+                connectedNodes.push(nodeId);
+                network.fit({ nodes: connectedNodes, animation: true });
+            }
+        });
+
+        function closeInfoPanel() {
+            document.getElementById("info-panel").style.display = "none";
+        }
+
+        function resetView() {
+            network.fit({ animation: true });
+        }
+
+        let physicsEnabled = true;
+        function togglePhysics() {
+            physicsEnabled = !physicsEnabled;
+            if (physicsEnabled) {
+                network.setOptions({ physics: { enabled: true, stabilization: { enabled: false } } });
+                // 给节点一个微小扰动让物理引擎重新活跃
+                characters.forEach(c => {
+                    const pos = network.getPositions([c.id])[c.id];
+                    if (pos) {
+                        nodes.update({ id: c.id, x: pos.x + (Math.random() - 0.5) * 20, y: pos.y + (Math.random() - 0.5) * 20 });
+                    }
+                });
+            } else {
+                network.setOptions({ physics: { enabled: false } });
+            }
+            document.getElementById("physics-btn").textContent = "物理引擎：" + (physicsEnabled ? "开" : "关");
+        }
+
+        // Search functionality
+        document.getElementById("search-box").addEventListener("input", function (e) {
+            const query = e.target.value.trim().toLowerCase();
+            if (!query) {
+                characters.forEach(c => {
+                    if (activeFilters.has(c.family)) {
+                        nodes.update({ id: c.id, opacity: 1, size: c.id === 20 || c.id === 11 || c.id === 4 ? 28 : (c.id === 50 || c.id === 51 ? 24 : 18), font: { color: "#eee" } });
+                    }
+                });
+                return;
+            }
+
+            const matchedIds = new Set();
+            characters.forEach(c => {
+                if (c.label.toLowerCase().includes(query) || c.desc.toLowerCase().includes(query)) {
+                    matchedIds.add(c.id);
+                }
+            });
+
+            characters.forEach(c => {
+                if (matchedIds.has(c.id)) {
+                    nodes.update({ id: c.id, opacity: 1, size: c.id === 20 || c.id === 11 || c.id === 4 ? 32 : 22 });
+                } else {
+                    nodes.update({ id: c.id, opacity: 0.15, size: 12 });
+                }
+            });
+
+            if (matchedIds.size > 0 && matchedIds.size <= 5) {
+                network.fit({ nodes: Array.from(matchedIds), animation: true });
+            }
+        });
+
+        // Legend item hover - highlight family
+        document.querySelectorAll(".legend-item[data-family]").forEach(item => {
+            item.addEventListener("mouseenter", function () {
+                const family = this.dataset.family;
+                const familyNodeIds = characters.filter(c => c.family === family).map(c => c.id);
+                network.selectNodes(familyNodeIds);
+            });
+            item.addEventListener("mouseleave", function () {
+                network.unselectAll();
+            });
+        });
+
+        // Initial fit after stabilization
+        network.once("stabilizationIterationsDone", function () {
+            network.fit({ animation: false });
+        });
+    </script>
+</body>
+</html>
